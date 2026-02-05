@@ -15,18 +15,9 @@
         name: apache2
         state: present
       when: ansible_os_family == "Debian"
-      
     - name: Ensure Apache is enabled and running (Debian/Ubuntu)
       service:
         name: apache2
         state: started
         enabled: yes
       when: ansible_os_family == "Debian"
-      command: restorecon -Rv "{{ web_root }}"
-      when:
-        - ansible_os_family == "RedHat"
-        - ansible_selinux is defined
-        - ansible_selinux.status == "enabled"
-
-
-
